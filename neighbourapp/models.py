@@ -3,20 +3,34 @@ from django.db import models
 # Create your models here.
 
 class NeighbourHood(models.Model):
+    neigborhood_id = models.AutoField()
     image_name = models.CharField(max_length =30)
     image_location = models.CharField(max_length =30)
     Occupants Count = models.PositiveIntegerField()
     Admin Foreign key = models.ForeignKey(User,on_delete=models.CASCADE ,null=True)
-    
+
+    @classmethod
     def create_neigborhood(cls,self):
- 
-    def delete_neigborhood():
+        return self.save()
+        
+    @classmethod
+    def delete_neigborhood(cls,self):
+        return self.delete()
 
-    def find_neigborhood(neigborhood_id):
+    @classmethod
+    def find_neigborhood(cls,neigborhood_id):
+        neigborhood_result = cls.objects.get(id = neigborhood_id)
+        return neigborhood_result
 
-    def update_neighborhood():
+    @classmethod    
+    def update_neighborhood(cls,current_value,new_value):
+        fetched_object = cls.objects.filter(name=current_value).update(name=new_value)
+        return fetched_object
 
-    def update_occupants():
+    @classmethod
+    def update_occupants(cls,current_value,new_value):
+        fetched_object = cls.objects.filter(name=current_value).update(name=new_value)
+        return fetched_object
 
 class Business(models.Model):
     user = models.ForeignKey(User,null=True)
