@@ -5,7 +5,8 @@ from django.conf import settings
 
 
 urlpatterns=[
-    url('^$',views.welcome,name = 'welcome'),
+    url(r'^$',views.welcome,name = 'welcome'),
+    url(r'^profile$', views.Profiles, name='profile'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

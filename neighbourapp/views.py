@@ -8,4 +8,4 @@ def welcome(request):
 
 def Profiles(request):
     profile = Profile.get_all()
-    return render(request, 'profile.html',{"profile":profile,"image":image,})
+    return render(request, 'profile.html',{"profile":profile})
