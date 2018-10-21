@@ -2,6 +2,27 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class Profile(models.Model):
+    profile_photo = models.ImageField(upload_to='profile-pics')
+    bio = models.TextField()
+    neighbourhood_name = models.CharField(max_length=30)
+    location = models.CharField(max_length=30)
+    
+    @classmethod
+    def get_all(cls):
+        all_objects = Profile.objects.all()
+        return all_objects
+     
+    @classmethod
+    def search_by_username(cls,search_term):
+        profile = cls.objects.filter(user__name__icontains=search_term)
+        return profile
+
+    @classmethod
+    def update_caption(cls,current_value,new_value):
+        fetched_object = Image.objects.filter(name=current_value).update(name=new_value)
+        return fetched_object
+
 class NeighbourHood(models.Model):
     name = models.CharField(max_length =30)
     location = models.CharField(max_length =30)
