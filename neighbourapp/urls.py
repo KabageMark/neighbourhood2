@@ -5,7 +5,7 @@ from django.conf import settings
 
 
 urlpatterns=[
-    url(r'^$',views.welcome,name = 'welcome'),
+    url(r'^$',views.home,name = 'home'),
     url(r'^profile$', views.Profiles, name='profile'),
 ]
 if settings.DEBUG:
