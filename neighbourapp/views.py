@@ -4,8 +4,17 @@ from .models import Profile,NeighbourHood,Business
 from .forms import NewProfileForm,NewBusinessForm,NewNeighbourHoodForm
 # Create your views here.
 def home(request):
+    title = 'neighbourhood'
     neighbourhood = NeighbourHood.get_all()
     form = NewNeighbourHoodForm
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewNeighbourHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_neighbourhood  = form.save()
+            new_neighbourhood.user = current_user
+            new_neighbourhood.save()
+        return redirect('home')
     return render(request, 'index.html',{ "neighbourhood": neighbourhood,"form":form,})
 
 
