@@ -84,3 +84,13 @@ class Business(models.Model):
     def update_caption(cls,current_value,new_value):
         fetched_object = cls.objects.filter(name=current_value).update(name=new_value)
         return fetched_object
+
+class Post(models.Model):
+    image = models.ImageField(upload_to='post_pics')
+    description = models.TextField()
+    title = models.CharField(max_length=30)
+
+    @classmethod
+    def get_all(cls):
+        all_objects = Post.objects.all()
+        return all_objects
