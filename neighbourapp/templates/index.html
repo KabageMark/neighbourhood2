@@ -3,15 +3,57 @@
 {% load bootstrap4 %}
 {% block content %}
 
-{% if neighbourhood %}
-{% for neigh in neighbourhood %}
 
-{{neigh.Occupants_count}}
-{{neigh.location}}
-{{neigh.name}}
+<div class="row">
+    {% if neighbourhood %}
+        {% for neigh in neighbourhood %}
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1gQ3lwFxU9tOE8LvntXD_a-jkNl2zlHaieuaI94HpPJZRdmuV" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{neigh.name}}</h5>
+          <p class="card-text">{{neigh.location}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{neigh.Occupants_count}}</li>
+        </ul>
+       </div>
+    </div>
+{% endfor %}    
+</div>
 
-{% endfor %}
+<br>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add neighbourhood
+  </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form  action="{%url 'home'%}" method="post" enctype="multipart/form-data">
+                  {%csrf_token%}
+                  
+                  {% bootstrap_form form %}
+                  <input type="submit" class="btn btn-success btn-lg" value="Post">
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 {% else %}
 
 
@@ -31,7 +73,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form  action="{%url 'business'%}" method="post" enctype="multipart/form-data">
+              <form  action="{%url 'home'%}" method="post" enctype="multipart/form-data">
                   {%csrf_token%}
                   
                   {% bootstrap_form form %}
