@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='profile-pics')
     bio = models.TextField()
-    neighbourhood_name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
 
     @classmethod
@@ -24,8 +24,8 @@ class Profile(models.Model):
         return fetched_object
 
 class NeighbourHood(models.Model):
-    name = models.CharField(max_length =30)
-    location = models.CharField(max_length =30)
+    name = models.CharField(max_length = 30)
+    location = models.CharField(max_length = 30)
     Occupants_count = models.PositiveIntegerField()
    
     def create_neigborhood(self):
@@ -33,6 +33,11 @@ class NeighbourHood(models.Model):
 
     def delete_neigborhood(self):
         return self.delete()
+
+    @classmethod
+    def get_all(cls):
+        all_objects = NeighbourHood.objects.all()
+        return all_objects    
 
     @classmethod
     def find_neigborhood(cls,neigborhood_id):

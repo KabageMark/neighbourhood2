@@ -3,5 +3,18 @@
 {% load bootstrap4 %}
 {% block content %}
 
-<h1>hello neighbours</h1>
+{% if neighbourhood %}
+{% for neigh in neighbourhood %}
+
+{{neigh.Occupants_count}}
+{{neigh.location}}
+{{neigh.name}}
+
+{% endfor %}
+
+{% else %}
+
+<h1>Create a neighbourhood</h1>
+
+{% endif %}
 {% endblock %}

@@ -4,7 +4,8 @@ from .models import Profile,NeighbourHood,Business
 from .forms import NewProfileForm,NewBusinessForm
 # Create your views here.
 def home(request):
-    return render(request, 'index.html')
+    neighbourhood = NeighbourHood.get_all()
+    return render(request, 'index.html',{ "neighbourhood": neighbourhood})
 
 
 def Profiles(request):
