@@ -5,7 +5,7 @@ from django.conf import settings
 
 
 urlpatterns=[
-    url(r'^$',views.home,name = 'home'),
+    url(r'^neighbourhood$',views.neighbourhood,name = 'neighbourhood'),
     url(r'^profile$', views.Profiles, name='profile'),
     url(r'^business$', views.business, name='business'),
     url(r'^search$', views.search_results, name='search'),

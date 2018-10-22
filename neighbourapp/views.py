@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse
-from .models import Profile,NeighbourHood,Business
-from .forms import NewProfileForm,NewBusinessForm,NewNeighbourHoodForm
+from .models import Profile,NeighbourHood,Business,Post
+from .forms import NewProfileForm,NewBusinessForm,NewNeighbourHoodForm,NewPostForm
 # Create your views here.
-def home(request):
+def neighbourhood(request):
     title = 'neighbourhood'
     neighbourhood = NeighbourHood.get_all()
     form = NewNeighbourHoodForm
@@ -46,6 +46,19 @@ def business(request):
         return redirect('business')
     return render(request, 'business.html',{"business":business, "form":form})
 
+def home(request):
+    posts = Post.get_all()
+    form = NewPostForm
+    title = 'neighbourhood'
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_post = form.save()
+            new_post.user = current_user
+            new_post.save()
+        return redirect('business')
+    return render(request, 'business.html',{"posts":posts, "form":form})
 
 def search_results(request):
     title = 'neighbourhood'
