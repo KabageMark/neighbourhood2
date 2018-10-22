@@ -41,9 +41,9 @@ def search_results(request):
                                                                   
     if 'search' in request.GET and request.GET['search']:
         search_item = request.GET.get('search')
-        searched_projects = Business.objects.filter(name=search_item)
-        message = f"{searched_projects}"
-        return render(request, 'search.html',{"message":message,"projects": searched_projects})
+        searched_business = Business.objects.filter(name=search_item)
+        message = f"{searched_business}"
+        return render(request, 'search.html',{"message":message,"business": searched_business})
     else:
         message = "You haven't searched for any business"
         return render(request, 'search.html',{"message":message})
