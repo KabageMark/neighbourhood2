@@ -7,7 +7,7 @@ class Profile(models.Model):
     bio = models.TextField()
     neighbourhood_name = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
-    
+
     @classmethod
     def get_all(cls):
         all_objects = Profile.objects.all()
@@ -53,11 +53,14 @@ class Business(models.Model):
     user = models.ForeignKey(User,null=True)
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=70,null=True)
-
-
+    
+    @classmethod
+    def get_all(cls):
+        all_objects = Business.objects.all()
+        return all_objects
+    
     def create_business(self):
         return self.save()
-
 
     def delete_business(self):
         return self.delete()
