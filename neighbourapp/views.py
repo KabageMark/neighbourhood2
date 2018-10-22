@@ -3,6 +3,7 @@ from django.http  import HttpResponse
 from .models import Profile,NeighbourHood,Business,Post
 from .forms import NewProfileForm,NewBusinessForm,NewNeighbourHoodForm,NewPostForm
 # Create your views here.
+
 def neighbourhood(request):
     title = 'neighbourhood'
     neighbourhood = NeighbourHood.get_all()
@@ -11,11 +12,11 @@ def neighbourhood(request):
     if request.method == 'POST':
         form = NewNeighbourHoodForm(request.POST, request.FILES)
         if form.is_valid():
-            new_neighbourhood  = form.save()
+            new_neighbourhood = form.save()
             new_neighbourhood.user = current_user
             new_neighbourhood.save()
-        return redirect('home')
-    return render(request, 'index.html',{ "neighbourhood": neighbourhood,"form":form,})
+        return redirect('neighbourhood')
+    return render(request, 'neighbourhood.html',{ "neighbourhood": neighbourhood,"form":form,})
 
 
 def Profiles(request):
@@ -57,8 +58,8 @@ def home(request):
             new_post = form.save()
             new_post.user = current_user
             new_post.save()
-        return redirect('business')
-    return render(request, 'business.html',{"posts":posts, "form":form})
+        return redirect('home')
+    return render(request, 'index.html',{"posts":posts, "form":form})
 
 def search_results(request):
     title = 'neighbourhood'

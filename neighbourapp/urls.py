@@ -9,6 +9,7 @@ urlpatterns=[
     url(r'^profile$', views.Profiles, name='profile'),
     url(r'^business$', views.business, name='business'),
     url(r'^search$', views.search_results, name='search'),
+    url(r'^$', views.home, name='home'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
