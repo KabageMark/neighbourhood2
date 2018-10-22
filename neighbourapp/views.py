@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse
 from .models import Profile,NeighbourHood,Business
-from .forms import NewProfileForm,NewBusinessForm
+from .forms import NewProfileForm,NewBusinessForm,NewNeighbourHoodForm
 # Create your views here.
 def home(request):
     neighbourhood = NeighbourHood.get_all()
-    return render(request, 'index.html',{ "neighbourhood": neighbourhood})
+    form = NewNeighbourHoodForm
+    return render(request, 'index.html',{ "neighbourhood": neighbourhood,"form":form,})
 
 
 def Profiles(request):

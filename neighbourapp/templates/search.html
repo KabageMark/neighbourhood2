@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<center>
+
 <div class="row">
   {% if business %}
     {% for business in business %}
-
+    <center>
         <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="http://www.iconarchive.com/download/i89191/icons8/ios7/Very-Basic-Briefcase.ico" alt="Card image cap">
             <div class="card-body">
@@ -13,11 +13,12 @@
               <a href="{{business.email}}" class="card-link">{{business.email}}</a>
             </div>
           </div>
+    </center>      
           {% endfor %}
             {% else %}
                <h2>there are no projects posted</h2>
         </div>
-</center>
+
   
     <h1 id='uname' >NO RESULTS</h1>
     {% endif %}
