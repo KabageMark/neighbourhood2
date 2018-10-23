@@ -64,33 +64,32 @@ class ProfileTest(TestCase):
 
 
 
-class projectTest(TestCase):
+class NeighbourHoodTest(TestCase):
     def setUp(self):
         self.user=User(username='kabagemark',first_name='mark',last_name='kabage',email='kabagemark@gmail.com')
         self.user.save()
-        self.new_profile=Profile(user=self.user,contacts="0796872516",bio='i love technology')
-        self.new_profile.save()
-        self.new_post = Project(user=self.user, project_link="https://www.google.com")
+        self.new_NeighbourHood=NeighbourHood( Occupants_count="6",name='Umoja',location='Mombasa')
+        self.new_NeighbourHood = NeighbourHood( Occupants_count="6",name='Umoja',location='Mombasa')
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_post,Project))
+        self.assertTrue(isinstance(self.new_NeighbourHood,NeighbourHood))
     
     def test_data(self):
-        self.assertTrue(self.new_post. project_link,"https://www.google.com")
+        self.assertTrue(self.new_NeighbourHood.location,'Mombasa')
         
     def test_save(self):
-        self.new_post.save()
-        posts = Project.objects.all()
-        self.assertTrue(len(posts)>0)
+        self.new_NeighbourHood.save()
+        Hood = NeighbourHood.objects.all()
+        self.assertTrue(len(Hood)>0)
     
     def test_delete(self):
-        post = Project.objects.filter(id=1)
-        post.delete()
-        posts = Project.objects.all()
-        self.assertTrue(len(posts)==0)
+        Hood = NeighbourHood.objects.filter(id=1)
+        Hood.delete()
+        Hood = NeighbourHood.objects.all()
+        self.assertTrue(len(Hood)==0)
 
     def test_update_post(self):
-        self.new_post.save()
-        self.update_post = Project.objects.filter(project_link='https://www.google.com').update(project_link = 'https://www.instadk.com')
-        self.updated_post = Project.objects.get(project_link='https://www.instadk.com')
-        self.assertTrue(self.updated_post.project_link,'https://www.instadk.com')
+        self.new_NeighbourHood.save()
+        self.update_NeighbourHood = NeighbourHood.objects.filter(name='Umoja').update(name='barnabas')
+        self.updated_NeighbourHood = NeighbourHood.objects.get(name='barnabas')
+        self.assertTrue(self.updated_NeighbourHood.name,'barnabas')
