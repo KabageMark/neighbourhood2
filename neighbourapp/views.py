@@ -2,8 +2,11 @@ from django.shortcuts import render,redirect
 from django.http  import HttpResponse
 from .models import Profile,NeighbourHood,Business,Post
 from .forms import NewProfileForm,NewBusinessForm,NewNeighbourHoodForm,NewPostForm
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def neighbourhood(request):
     title = 'neighbourhood'
     neighbourhood = NeighbourHood.get_all()
@@ -18,7 +21,7 @@ def neighbourhood(request):
         return redirect('neighbourhood')
     return render(request, 'neighbourhood.html',{ "neighbourhood": neighbourhood,"form":form,})
 
-
+@login_required(login_url='/accounts/login/')
 def Profiles(request):
     profile = Profile.get_all()
     form = NewProfileForm
@@ -33,6 +36,7 @@ def Profiles(request):
         return redirect('profile')
     return render(request, 'profile.html',{"profile":profile,"form":form})
 
+@login_required(login_url='/accounts/login/')
 def business(request):
     business = Business.get_all()
     form = NewBusinessForm
@@ -47,6 +51,7 @@ def business(request):
         return redirect('business')
     return render(request, 'business.html',{"business":business, "form":form})
 
+@login_required(login_url='/accounts/login/')
 def home(request):
     posts = Post.get_all()
     form = NewPostForm
