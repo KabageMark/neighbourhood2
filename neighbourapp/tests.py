@@ -31,16 +31,16 @@ class UserTest(TestCase):
 
 class ProfileTest(TestCase):
     def setUp(self):
-        self.new_user=User(username='markabage',first_name='mark',last_name='kabage',email='kabagemark@gmail.com')
-        self.new_user.save()
-        self.new_profile=Profile(user=self.new_user,contacts ="0796872516",bio='i love technology')
+        self.new_profile=Profile(name ="mark",bio='i love technology',location="Mombasa",profile_photo="https://www.google.com")
 
     def test_instance(self):
         self.assertTrue(isinstance(self.new_profile,Profile))
     
     def test_data(self):
         self.assertTrue(self.new_profile.bio,"i love technology")
-        self.assertTrue(self.new_profile.user,self.new_user)
+        self.assertTrue(self.new_profile.name,"mark")
+        self.assertTrue(self.new_profile.location,"Mombasa")
+        self.assertTrue(self.new_profile.profile_photo,"https://www.google.com")
 
     def test_save(self):
         self.new_profile.save()
